@@ -1,0 +1,53 @@
+import { z } from 'zod'
+import { Request, Response, NextFunction } from 'express'
+
+// Register schema
+const registerSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(50, 'Name cannot exceed 50 characters'),
+  email: z.string().email('Please enter a valid email'),
+  password: z
+    .string()
+    .min(6, 'Password must be at least 6 characters')
+    .max(50, 'Password cannot exceed 50 characters'),
+})
+
+// Login schema
+const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email'),
+  password: z.string().min(1, 'Password is required'),
+})
+
+// Middleware to validate register input
+export const validateRegister = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = registerSchema.safeParse(req.body)
+  if (!result.success) {
+    return res.status(400).json({
+      success: false,
+      message: result.error.errors[0].message,
+    })
+  }
+  next()
+}
+
+// Middleware to validate login input
+export const validateLogin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const result = loginSchema.safeParse(req.body)
+  if (!result.success) {
+    return res.status(400).json({
+      success: false,
+      message: result.error.errors[0].message,
+    })
+  }
+  next()
+}
