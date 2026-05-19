@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { User } from '../users/user.model'
 import { ApiError } from '../../utils/ApiError'
 import {

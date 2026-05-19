@@ -3,7 +3,7 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import mongoSanitize from 'express-mongo-sanitize'
+//import mongoSanitize from 'express-mongo-sanitize'
 import { rateLimit } from 'express-rate-limit'
 import { errorHandler } from './middleware/errorHandler'
 import authRoutes from './modules/auth/auth.routes'
@@ -12,7 +12,7 @@ import 'dotenv/config'
 const app = express()
 
 app.use(helmet())
-app.use(mongoSanitize())
+//app.use(mongoSanitize())
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
