@@ -16,5 +16,6 @@ Moiz Patel	Team Lead + Auth + DevOps
 Jay	Frontend + Dashboard + UI
 Rohit	Meetings + Chat + Socket.io
 Charulatha	Kanban + Task Management
+
 ⚠️ Active development is on the develop branch. This branch will be updated upon final release.
 
