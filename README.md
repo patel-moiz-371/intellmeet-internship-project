@@ -180,7 +180,7 @@ React 19 · Node.js · Express · MongoDB · Socket.io · WebRTC · OpenAI · Ty
 
 👥 Team
 Name	Role
-Moiz Patel	Team Lead + Auth + DevOps
+Moiz	Team Lead + Auth + DevOps
 Jay	Frontend + Dashboard + UI
 Rohit	Meetings + Chat + Socket.io
 Charulatha	Kanban + Task Management
