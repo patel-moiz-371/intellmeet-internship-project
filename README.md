@@ -1,8 +1,8 @@
-# IntellMeet 🎯
-### AI-Powered Enterprise Meeting & Collaboration Platform
-
+IntellMeet 🎯
+AI-Powered Enterprise Meeting & Collaboration Platform
 IntellMeet is a production-grade meeting and collaboration platform built with the MERN stack. It features real-time video meetings, AI-powered transcription and summaries, team collaboration, Kanban task management, and an analytics dashboard.
 
+Built as part of the Zidio Development Internship 2026 — Web Development (MERN) Domain
 > Built as part of the Zidio Development Internship 2026 — Web Development (MERN) Domain
 
 ![Login Page](./docs/screenshots/login.png)
@@ -172,24 +172,18 @@ git pull origin develop
 # Create feature branch
 git checkout -b feature/your-feature-name
 
-# After coding
-git add .
-git commit -m "feat: describe what you built"
-git push origin feature/your-feature-name
+🚀 Live Demo
+Coming soon
 
-# Open Pull Request on GitHub → develop
-```
+⚙️ Tech Stack
+React 19 · Node.js · Express · MongoDB · Socket.io · WebRTC · OpenAI · TypeScript · Tailwind CSS · Docker
 
-### Commit Message Format
-| Prefix | Usage |
-|--------|-------|
-| `feat:` | New feature |
-| `fix:` | Bug fix |
-| `chore:` | Config or setup |
-| `docs:` | Documentation |
-| `style:` | UI styling only |
+👥 Team
+Name	Role
+Moiz Patel	Team Lead + Auth + DevOps
+Jay	Frontend + Dashboard + UI
+Rohit	Meetings + Chat + Socket.io
+Charulatha	Kanban + Task Management
 
----
+⚠️ Active development is on the develop branch. This branch will be updated upon final release.
 
-## 📄 License
-MIT License — see [LICENSE](LICENSE) for details
