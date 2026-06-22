@@ -82,11 +82,12 @@ const LoginPage = () => {
             {/* Google Sign In */}
             <button
               type="button"
+              onClick={() => window.location.href = 'http://localhost:5000/api/auth/google'}
               className="w-full flex items-center justify-center gap-3 bg-white/10 hover:bg-white/15 border border-white/10 text-white font-medium py-3 rounded-xl transition-all mb-6"
-            >
+              >
               <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4" />
-              Continue with Google
-            </button>
+               Continue with Google
+              </button>
 
             {/* Divider */}
             <div className="flex items-center gap-3 mb-6">

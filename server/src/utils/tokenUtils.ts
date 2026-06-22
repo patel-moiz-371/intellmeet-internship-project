@@ -5,10 +5,10 @@ interface TokenPayload {
   role: string
 }
 
-// Generate short-lived access token (15 minutes)
+// Generate access token (7 days)
 export const generateAccessToken = (payload: TokenPayload): string => {
   return jwt.sign(payload, process.env.JWT_SECRET as string, {
-    expiresIn: '15m',
+    expiresIn: '7d',
   })
 }
 

@@ -3,8 +3,11 @@ import { useAuthStore } from '@/store/authStore'
 import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
 import DashboardPage from '@/pages/dashboard/DashboardPage'
-import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
+import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
 import AppShell from '@/components/layout/AppShell'
+import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
+import ProfilePage from '@/pages/profile/ProfilePage'
+import KanbanPage from '@/pages/tasks/KanbanPage'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
@@ -21,18 +24,19 @@ const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        {/* Public routes */}
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
+        <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
-        <Route
-          element={
-            <ProtectedRoute>
-              <AppShell />
-            </ProtectedRoute>
-          }
-        >
+        {/* Protected routes with AppShell layout */}
+        <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/tasks" element={<KanbanPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
