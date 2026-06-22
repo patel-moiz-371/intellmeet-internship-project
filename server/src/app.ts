@@ -9,7 +9,8 @@ import { errorHandler } from './middleware/errorHandler'
 import authRoutes from './modules/auth/auth.routes'
 import googleRoutes from './modules/auth/google.routes'
 import passport from './config/passport'
-
+import taskRoutes from './modules/tasks/task.routes'
+import userRoutes from './modules/users/user.routes'
 const app = express()
 
 // Security headers
@@ -50,6 +51,8 @@ app.get('/health', (_, res) => {
 // Routes
 app.use('/api/auth', authRoutes)
 app.use('/api/auth', googleRoutes)
+app.use('/api/tasks', taskRoutes)
+app.use('/api/users', userRoutes)
 
 // Global error handler
 app.use(errorHandler)

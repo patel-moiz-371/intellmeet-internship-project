@@ -7,6 +7,7 @@ import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
 import AppShell from '@/components/layout/AppShell'
 import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
 import ProfilePage from '@/pages/profile/ProfilePage'
+import KanbanPage from '@/pages/tasks/KanbanPage'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
@@ -33,6 +34,8 @@ const AppRouter = () => {
         <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/tasks" element={<KanbanPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Route>
 
