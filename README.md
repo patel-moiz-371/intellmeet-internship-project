@@ -9,6 +9,14 @@ IntellMeet is a production-grade meeting and collaboration platform built with t
 
 ![Register Page](./docs/screenshots/register.png)
 
+![Dashboard Page](./docs/screenshots/dashboard.png)
+
+![Tasks Page](./docs/screenshots/tasks.png)
+
+![Analytics Page](./docs/screenshots/analytics.png)
+
+![Profile Page](./docs/screenshots/profile.png)
+
 ---
 
 ## 🚀 Live Demo
