@@ -5,9 +5,9 @@
 
 IntellMeet is a production-grade meeting and collaboration platform built with the MERN stack. It brings together real-time video conferencing, AI-powered transcription and meeting summaries, team collaboration, Kanban task management, and a productivity analytics dashboard — all in one place.
 
-![Login Page](D:\Zidio Internship 2026\login.png)
+![Login Page](./docs/screenshots/login.png)
 
-![Register Page](D:\Zidio Internship 2026\Register.png)
+![Register Page](./docs/screenshots/register.png)
 
 ---
 
