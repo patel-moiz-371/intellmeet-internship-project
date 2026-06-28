@@ -18,9 +18,17 @@ const Navbar = () => {
         </button>
 
         <div className="flex items-center gap-3">
+          {user?.avatar ? (
+          <img
+          src={user.avatar}
+          alt="avatar"
+          className="w-10 h-10 rounded-full object-cover border-2 border-blue-500"
+          />
+          ) : (
           <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
-            {user?.name?.charAt(0).toUpperCase()}
+          {user?.name?.charAt(0).toUpperCase()}
           </div>
+          )}
 
           <span className="text-white font-medium">
             {user?.name}
