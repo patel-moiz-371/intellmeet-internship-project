@@ -9,6 +9,15 @@ import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
 import ProfilePage from '@/pages/profile/ProfilePage'
 import KanbanPage from '@/pages/tasks/KanbanPage'
 
+// Add this temporary component at the top of AppRouter.tsx (above ProtectedRoute)
+const MeetingPagePlaceholder = () => (
+  <div className="flex items-center justify-center h-full">
+    <div className="text-center">
+      <h1 className="text-2xl font-bold text-white mb-2">Meetings</h1>
+      <p className="text-gray-400">Coming soon — under development</p>
+    </div>
+  </div>
+)
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />
@@ -37,6 +46,7 @@ const AppRouter = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/tasks" element={<KanbanPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/meetings" element={<MeetingPagePlaceholder />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
