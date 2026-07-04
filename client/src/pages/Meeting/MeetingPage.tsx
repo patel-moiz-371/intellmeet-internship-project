@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuthStore } from '@/store/authStore'
 import MeetingCard from '@/components/meeting/MeetingCard'
+import { useNavigate } from 'react-router-dom'
 
 const API_BASE = 'http://localhost:5000/api/meetings'
 
@@ -16,6 +17,7 @@ interface Meeting {
 
 const MeetingPage = () => {
   const { token, user } = useAuthStore()
+  const navigate = useNavigate()
   const [meetings, setMeetings] = useState<Meeting[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -71,21 +73,20 @@ const MeetingPage = () => {
     }
   }
 
-  const handleJoin = async (meetingId: string) => {
-    try {
-      const res = await fetch(`${API_BASE}/${meetingId}/join`, {
-        method: 'PATCH',
-        headers,
-      })
-      const data = await res.json()
-      if (data.success) {
-        alert(`Joined meeting! Code: ${data.data.meetingCode}`)
-        fetchMeetings()
-      }
-    } catch {
-      setError('Failed to join meeting')
+const handleJoin = async (meetingId: string, meetingCode: string) => {
+  try {
+    const res = await fetch(`${API_BASE}/${meetingId}/join`, {
+      method: 'PATCH',
+      headers,
+    })
+    const data = await res.json()
+    if (data.success) {
+      navigate(`/meeting-room/${data.data.meetingCode}`)
     }
+  } catch {
+    setError('Failed to join meeting')
   }
+}
 
   return (
     <div className="p-6">
@@ -129,7 +130,7 @@ const MeetingPage = () => {
               host={meeting.host?.name || 'Unknown'}
               date={new Date(meeting.scheduledAt).toLocaleString()}
               status={meeting.status === 'active' ? 'Active' : 'Scheduled'}
-              onJoin={() => handleJoin(meeting._id)}
+              onJoin={() => handleJoin(meeting._id, meeting.meetingCode)}
             />
           ))}
         </div>
