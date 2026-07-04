@@ -11,6 +11,7 @@ import googleRoutes from './modules/auth/google.routes'
 import passport from './config/passport'
 import taskRoutes from './modules/tasks/task.routes'
 import userRoutes from './modules/users/user.routes'
+import meetingRoutes from './modules/meetings/meeting.routes'
 const app = express()
 
 // Security headers
@@ -53,6 +54,7 @@ app.use('/api/auth', authRoutes)
 app.use('/api/auth', googleRoutes)
 app.use('/api/tasks', taskRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/meetings', meetingRoutes)
 
 // Global error handler
 app.use(errorHandler)

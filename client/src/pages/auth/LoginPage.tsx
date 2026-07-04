@@ -19,23 +19,28 @@ const LoginPage = () => {
     setError('')
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!form.email || !form.password) {
-      setError('Please fill in all fields')
-      return
-    }
-    try {
-      setLoading(true)
-      const res = await loginAPI(form)
-      setAuth(res.data.user, res.data.accessToken)
-      navigate('/dashboard')
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Login failed')
-    } finally {
-      setLoading(false)
-    }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
+  if (!form.email || !form.password) {
+    setError('Please fill in all fields')
+    return
   }
+  try {
+    setLoading(true)
+    const res = await loginAPI(form)
+    console.log('Login response:', res)           // ADD THIS
+    console.log('User:', res.user)                // ADD THIS
+    console.log('Token:', res.accessToken)        // ADD THIS
+    setAuth(res.user, res.accessToken)
+    console.log('Auth set, navigating...')        // ADD THIS
+    navigate('/dashboard')
+  } catch (err: any) {
+    console.log('Login error:', err)              // ADD THIS
+    setError(err.response?.data?.message || 'Login failed')
+  } finally {
+    setLoading(false)
+  }
+}
 
   return (
     <div className="min-h-screen flex">

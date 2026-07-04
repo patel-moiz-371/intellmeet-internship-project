@@ -8,6 +8,7 @@ import AppShell from '@/components/layout/AppShell'
 import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
 import ProfilePage from '@/pages/profile/ProfilePage'
 import KanbanPage from '@/pages/tasks/KanbanPage'
+import MeetingPage from '@/pages/meeting/MeetingPage'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
@@ -37,6 +38,7 @@ const AppRouter = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/tasks" element={<KanbanPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/meetings" element={<MeetingPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
