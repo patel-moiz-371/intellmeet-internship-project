@@ -10,6 +10,7 @@ import KanbanPage from '@/pages/tasks/KanbanPage'
 import MeetingPage from '@/pages/meeting/MeetingPage'
 import MeetingRoom from '@/pages/meeting/MeetingRoom'
 import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
+import PreJoin from '@/pages/meeting/PreJoin'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
@@ -41,6 +42,7 @@ const AppRouter = () => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/tasks" element={<KanbanPage />} />
           <Route path="/meetings" element={<MeetingPage />} />
+          <Route path="/pre-join/:meetingCode" element={<ProtectedRoute><PreJoin /></ProtectedRoute>} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

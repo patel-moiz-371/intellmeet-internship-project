@@ -73,19 +73,11 @@ const MeetingPage = () => {
     }
   }
 
-const handleJoin = async (meetingId: string, meetingCode: string) => {
-  try {
-    const res = await fetch(`${API_BASE}/${meetingId}/join`, {
-      method: 'PATCH',
-      headers,
-    })
-    const data = await res.json()
-    if (data.success) {
-      navigate(`/meeting-room/${data.data.meetingCode}`)
-    }
-  } catch {
-    setError('Failed to join meeting')
-  }
+const handleJoin = (meetingId: string, meetingCode: string, meetingTitle: string, hostEmail: string) => {
+  const isHost = user?.email === hostEmail
+  navigate(`/pre-join/${meetingCode}`, {
+    state: { meetingTitle, isHost }
+  })
 }
 
   return (
@@ -130,7 +122,7 @@ const handleJoin = async (meetingId: string, meetingCode: string) => {
               host={meeting.host?.name || 'Unknown'}
               date={new Date(meeting.scheduledAt).toLocaleString()}
               status={meeting.status === 'active' ? 'Active' : 'Scheduled'}
-              onJoin={() => handleJoin(meeting._id, meeting.meetingCode)}
+              onJoin={() => handleJoin(meeting._id, meeting.meetingCode, meeting.title, meeting.host?.email)}
             />
           ))}
         </div>
