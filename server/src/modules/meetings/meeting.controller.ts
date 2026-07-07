@@ -41,8 +41,8 @@ export const updateMeetingStatus = asyncHandler(async (req: Request, res: Respon
 })
 
 export const deleteMeeting = asyncHandler(async (req: Request, res: Response) => {
-  const { taskId } = req.params
-  await meetingService.deleteMeeting(taskId)
+  const { meetingId } = req.params  // FIXED
+  await meetingService.deleteMeeting(meetingId)
   res.status(200).json(new ApiResponse('Meeting deleted'))
 })
 
