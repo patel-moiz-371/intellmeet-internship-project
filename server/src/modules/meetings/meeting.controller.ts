@@ -1,8 +1,6 @@
-// server/src/modules/meetings/meeting.controller.ts
 import { Request, Response } from 'express'
 import { asyncHandler } from '../../utils/asyncHandler'
 import { ApiResponse } from '../../utils/ApiResponse'
-import { ApiError } from '../../utils/ApiError'
 import * as meetingService from './meeting.service'
 
 export const getAllMeetings = asyncHandler(async (_req: Request, res: Response) => {
@@ -43,7 +41,7 @@ export const updateMeetingStatus = asyncHandler(async (req: Request, res: Respon
 })
 
 export const deleteMeeting = asyncHandler(async (req: Request, res: Response) => {
-  const { meetingId } = req.params
+  const { meetingId } = req.params  // FIXED
   await meetingService.deleteMeeting(meetingId)
   res.status(200).json(new ApiResponse('Meeting deleted'))
 })

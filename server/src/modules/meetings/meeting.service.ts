@@ -1,4 +1,3 @@
-// server/src/modules/meetings/meeting.service.ts
 import { Meeting } from './meeting.model'
 
 export const getAllMeetings = async () => {

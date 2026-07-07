@@ -1,4 +1,3 @@
-// server/src/modules/meetings/meeting.routes.ts
 import { Router } from 'express'
 import {
   getAllMeetings,

@@ -1,4 +1,3 @@
-// server/src/modules/meetings/meeting.model.ts
 import mongoose, { Document, Schema } from 'mongoose'
 
 export interface IMeeting extends Document {
@@ -50,7 +49,6 @@ const meetingSchema = new Schema<IMeeting>(
   }
 )
 
-// Auto-generate a unique 6-character meeting code before saving
 meetingSchema.pre('save', function () {
   if (!this.meetingCode) {
     this.meetingCode = Math.random().toString(36).substring(2, 8).toUpperCase()

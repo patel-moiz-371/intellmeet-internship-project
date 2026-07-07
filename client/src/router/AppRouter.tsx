@@ -3,11 +3,14 @@ import { useAuthStore } from '@/store/authStore'
 import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
 import DashboardPage from '@/pages/dashboard/DashboardPage'
-import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
 import AppShell from '@/components/layout/AppShell'
 import AnalyticsPage from '@/pages/analytics/AnalyticsPage'
 import ProfilePage from '@/pages/profile/ProfilePage'
 import KanbanPage from '@/pages/tasks/KanbanPage'
+import MeetingPage from '@/pages/meeting/MeetingPage'
+import MeetingRoom from '@/pages/meeting/MeetingRoom'
+import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
+import PreJoin from '@/pages/meeting/PreJoin'
 
 // Add this temporary component at the top of AppRouter.tsx (above ProtectedRoute)
 const MeetingPagePlaceholder = () => (
@@ -38,6 +41,8 @@ const AppRouter = () => {
         <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
         <Route path="/auth/callback" element={<AuthCallbackPage />} />
+        {/* Full screen meeting room - outside AppShell */}
+        <Route path="/meeting-room/:meetingCode" element={<ProtectedRoute><MeetingRoom /></ProtectedRoute>} />
 
         {/* Protected routes with AppShell layout */}
         <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
@@ -45,8 +50,8 @@ const AppRouter = () => {
           <Route path="/analytics" element={<AnalyticsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/tasks" element={<KanbanPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/meetings" element={<MeetingPagePlaceholder />} />
+          <Route path="/meetings" element={<MeetingPage />} />
+          <Route path="/pre-join/:meetingCode" element={<ProtectedRoute><PreJoin /></ProtectedRoute>} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -3,12 +3,12 @@ import type { LoginCredentials, RegisterCredentials, AuthResponse } from '@/type
 
 export const registerAPI = async (data: RegisterCredentials): Promise<AuthResponse> => {
   const res = await axiosInstance.post('/auth/register', data)
-  return res.data
+  return res.data.data
 }
 
 export const loginAPI = async (data: LoginCredentials): Promise<AuthResponse> => {
   const res = await axiosInstance.post('/auth/login', data)
-  return res.data
+  return res.data.data
 }
 
 export const logoutAPI = async (): Promise<void> => {
