@@ -12,6 +12,15 @@ import MeetingRoom from '@/pages/meeting/MeetingRoom'
 import AuthCallbackPage from '@/pages/auth/AuthCallbackPage'
 import PreJoin from '@/pages/meeting/PreJoin'
 
+// Add this temporary component at the top of AppRouter.tsx (above ProtectedRoute)
+const MeetingPagePlaceholder = () => (
+  <div className="flex items-center justify-center h-full">
+    <div className="text-center">
+      <h1 className="text-2xl font-bold text-white mb-2">Meetings</h1>
+      <p className="text-gray-400">Coming soon — under development</p>
+    </div>
+  </div>
+)
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuthStore()
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />
