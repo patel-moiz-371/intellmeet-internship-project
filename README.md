@@ -6,21 +6,13 @@
 IntellMeet is a production-grade meeting and collaboration platform built with the MERN stack. It brings together real-time video conferencing, AI-powered transcription and meeting summaries, team collaboration, Kanban task management, and a productivity analytics dashboard — all in one place.
 
 ![Login Page](./docs/screenshots/login.png)
-
 ![Register Page](./docs/screenshots/register.png)
-
 ![Dashboard Page](./docs/screenshots/dashboard.png)
-
 ![Meeting Page](./docs/screenshots/meeting.png)
-
-![Meeting Page](./docs/screenshots/meeting-prejoin.png)
-
-![Meeting Page](./docs/screenshots/meeting-room.png)
-
+![Pre-Join Page](./docs/screenshots/meeting-prejoin.png)
+![Meeting Room](./docs/screenshots/meeting-room.png)
 ![Tasks Page](./docs/screenshots/task.png)
-
 ![Analytics Page](./docs/screenshots/analytics.png)
-
 ![Profile Page](./docs/screenshots/profile.png)
 
 ---
@@ -56,16 +48,17 @@ IntellMeet is a production-grade meeting and collaboration platform built with t
 - [x] Authentication — JWT + Refresh Tokens + Role Based Access Control
 - [x] Protected & Public Routes
 - [x] App Shell Layout — Sidebar + Navbar across all pages
-- [x] Dashboard — Welcome screen with live stats cards
+- [x] Dashboard — Live stats, upcoming meetings, recent meetings
+- [x] Meetings — Create, join, delete, filter, auto status updates
+- [x] Pre-Join Preview — Camera/mic check before entering meeting room
+- [x] Meeting Room — Live video, mic/camera toggle, real-time chat, participants list
 - [x] Kanban Task Board — Drag & drop, real-time DB, filters (All / My Tasks / High Priority)
-- [x] Analytics — Meeting activity charts, task completion by department, recent meetings table
+- [x] Analytics — Live meeting + task charts, recent meetings table
 - [x] User Profile — Update name + avatar (with live navbar sync)
 - [x] User Roles — admin / host / member / viewer
-- [ ] Real-Time Video Meetings (WebRTC) — in progress
 - [ ] Screen Sharing & Recording
 - [ ] AI Meeting Transcription (Whisper)
 - [ ] AI Summaries & Action Item Extraction (GPT-4)
-- [ ] Real-Time Chat (Socket.io)
 - [ ] Fully Responsive UI
 
 ---
@@ -74,9 +67,9 @@ IntellMeet is a production-grade meeting and collaboration platform built with t
 
 | Name | Role | GitHub |
 |------|------|--------|
-| Moiz | Team Lead + Auth + Integration + DevOps | [@patel-moiz-371](https://github.com/patel-moiz-371) |
+| Moiz | Team Lead + Auth + Meetings + Integration + DevOps | [@patel-moiz-371](https://github.com/patel-moiz-371) |
 | Jay | Frontend + Dashboard + UI Components | [@gaikwadjay181](https://github.com/gaikwadjay181) |
-| Rohit | Meetings + Chat + Socket.io | [@DhoriRohit1](https://github.com/DhoriRohit1) |
+| Rohit | Meetings + Chat + Socket.io *(incomplete)* | [@DhoriRohit1](https://github.com/DhoriRohit1) |
 | Charulatha | Kanban + Task Management | [@Charulatha2324](https://github.com/Charulatha2324) |
 
 ---
@@ -93,18 +86,18 @@ IntellMeet is a production-grade meeting and collaboration platform built with t
 ---
 
 ## 🗂️ Project Structure
-
-```
 intellmeet/
 ├── client/                  # React 19 + Vite frontend
 │   └── src/
 │       ├── components/      # Reusable UI components
 │       │   ├── layout/      # AppShell, Navbar, Sidebar
 │       │   ├── analytics/   # StatsCard, MeetingChart
+│       │   ├── meeting/     # MeetingCard
 │       │   └── kanban/      # Board, Column, TaskCard, AddTaskModal
 │       ├── pages/           # Route level pages
 │       │   ├── auth/        # Login, Register
 │       │   ├── dashboard/   # Dashboard
+│       │   ├── meeting/     # MeetingPage, MeetingRoom, PreJoin
 │       │   ├── tasks/       # Kanban Board
 │       │   ├── analytics/   # Analytics
 │       │   └── profile/     # User Profile
@@ -114,15 +107,14 @@ intellmeet/
 │   └── src/
 │       ├── modules/
 │       │   ├── auth/        # Register, Login, Refresh, Logout
+│       │   ├── meetings/    # Meeting CRUD + join + status
 │       │   ├── tasks/       # Task CRUD + status update
 │       │   └── users/       # Profile get + update
 │       ├── middleware/      # Auth, error handler
-│       ├── socket/          # Socket.io events
+│       ├── socket/          # Socket.io — chat + participants
 │       └── utils/           # ApiResponse, ApiError, asyncHandler
 ├── docs/                    # Screenshots & documentation
 └── .github/                 # CI/CD workflows
-```
-
 ---
 
 ## 🛠️ Local Setup
@@ -170,11 +162,8 @@ npm run dev
 ```
 
 ### 4. Open in Browser
-```
 Frontend: http://localhost:3000
 Backend:  http://localhost:5000/health
-```
-
 ---
 
 ## 🔐 API Endpoints
@@ -192,6 +181,16 @@ Backend:  http://localhost:5000/health
 |--------|----------|-------------|
 | GET | `/api/users/me` | Get current user profile |
 | PATCH | `/api/users/me` | Update name + avatar |
+
+### Meetings
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/meetings` | Get all meetings |
+| POST | `/api/meetings` | Create new meeting |
+| GET | `/api/meetings/:meetingId` | Get meeting by ID |
+| PATCH | `/api/meetings/:meetingId/status` | Update meeting status |
+| PATCH | `/api/meetings/:meetingId/join` | Join a meeting |
+| DELETE | `/api/meetings/:meetingId` | Delete a meeting |
 
 ### Tasks
 | Method | Endpoint | Description |
