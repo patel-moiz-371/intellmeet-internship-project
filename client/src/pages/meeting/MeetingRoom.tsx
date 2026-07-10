@@ -6,8 +6,7 @@ import {
   Mic, MicOff, Video, VideoOff, PhoneOff,
   MessageSquare, Users, X, Send
 } from 'lucide-react'
-
-const SOCKET_URL = 'http://localhost:5000'
+import { SOCKET_URL } from '@/config/constants'
 
 interface Message {
   id: number

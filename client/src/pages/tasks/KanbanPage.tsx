@@ -4,8 +4,9 @@ import { Board } from "../../components/kanban/Board";
 import { AddTaskModal } from "../../components/kanban/AddTaskModal";
 import type { ClientTask } from "../../components/kanban/Column";
 import { Plus, Filter, RefreshCw, AlertCircle } from "lucide-react";
+import { API_BASE_URL as BASE_API_URL } from '@/config/constants'
 
-const API_BASE_URL = "http://localhost:5000/api/tasks";
+const TASKS_API_URL = `${BASE_API_URL}/tasks`
 
 const DEFAULT_MOCK_TASKS: ClientTask[] = [
   {
@@ -58,7 +59,7 @@ const getHeaders = () => {
   setLoading(true);
   setError("");
   try {
-    const response = await fetch(API_BASE_URL, {
+    const response = await fetch(TASKS_API_URL, {
       headers: getHeaders(),
     });
     if (!response.ok) {
@@ -120,7 +121,7 @@ const getHeaders = () => {
     }
 
     try {
-      const response = await fetch(API_BASE_URL, {
+      const response = await fetch(TASKS_API_URL, {
         method: "POST",
         headers: getHeaders(),
         body: JSON.stringify(payload),
@@ -151,7 +152,7 @@ const getHeaders = () => {
     setTasks((prev) => prev.filter((t) => t._id !== id));
 
     try {
-      const response = await fetch(`${API_BASE_URL}/${id}`, {
+      const response = await fetch(`${TASKS_API_URL}/${id}`, {
         method: "DELETE",
         headers: getHeaders(),
       });
@@ -178,7 +179,7 @@ const getHeaders = () => {
     if (isMockMode) return;
 
     try {
-      const response = await fetch(`${API_BASE_URL}/${taskId}/status`, {
+      const response = await fetch(`${TASKS_API_URL}/${taskId}/status`, {
         method: "PATCH",
         headers: getHeaders(),
         body: JSON.stringify({ status: targetStatus }),

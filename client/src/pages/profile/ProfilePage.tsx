@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useAuthStore } from '@/store/authStore'
+import { API_BASE_URL } from '@/config/constants'
 
 const ProfilePage = () => {
   const { user, token, setAuth } = useAuthStore()
@@ -33,7 +34,7 @@ const ProfilePage = () => {
     setSaving(true)
     setMessage('')
     try {
-      const response = await fetch('http://localhost:5000/api/users/me', {
+      const response = await fetch(`${API_BASE_URL}/users/me`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

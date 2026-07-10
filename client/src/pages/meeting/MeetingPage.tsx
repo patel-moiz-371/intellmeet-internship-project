@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { useAuthStore } from '@/store/authStore'
 import { useNavigate } from 'react-router-dom'
 import { Calendar, Users, Clock, Plus, Trash2, Video, CheckCircle, AlertCircle } from 'lucide-react'
+import { API_BASE_URL } from '@/config/constants'
 
-const API_BASE = 'http://localhost:5000/api/meetings'
+const API_BASE = `${API_BASE_URL}/meetings`
 
 interface Meeting {
   _id: string
