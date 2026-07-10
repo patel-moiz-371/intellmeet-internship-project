@@ -3,13 +3,16 @@ import { asyncHandler } from '../../utils/asyncHandler'
 import { ApiResponse } from '../../utils/ApiResponse'
 import * as meetingService from './meeting.service'
 
+const getParam = (value: string | string[]): string =>
+  Array.isArray(value) ? value[0] : value
+
 export const getAllMeetings = asyncHandler(async (_req: Request, res: Response) => {
   const meetings = await meetingService.getAllMeetings()
   res.status(200).json(new ApiResponse('Meetings fetched', meetings))
 })
 
 export const getMeetingById = asyncHandler(async (req: Request, res: Response) => {
-  const { meetingId } = req.params
+  const meetingId = getParam(req.params.meetingId)
   const meeting = await meetingService.getMeetingById(meetingId)
   if (!meeting) {
     res.status(404).json({ success: false, message: 'Meeting not found' })
@@ -30,7 +33,7 @@ export const createMeeting = asyncHandler(async (req: Request, res: Response) =>
 })
 
 export const updateMeetingStatus = asyncHandler(async (req: Request, res: Response) => {
-  const { meetingId } = req.params
+  const meetingId = getParam(req.params.meetingId)
   const { status } = req.body
   const meeting = await meetingService.updateMeetingStatus(meetingId, status)
   if (!meeting) {
@@ -41,13 +44,13 @@ export const updateMeetingStatus = asyncHandler(async (req: Request, res: Respon
 })
 
 export const deleteMeeting = asyncHandler(async (req: Request, res: Response) => {
-  const { meetingId } = req.params  // FIXED
+  const meetingId = getParam(req.params.meetingId)  // FIXED
   await meetingService.deleteMeeting(meetingId)
   res.status(200).json(new ApiResponse('Meeting deleted'))
 })
 
 export const joinMeeting = asyncHandler(async (req: Request, res: Response) => {
-  const { meetingId } = req.params
+  const meetingId = getParam(req.params.meetingId)
   const userId = (req as any).user.userId
   const meeting = await meetingService.joinMeeting(meetingId, userId)
   if (!meeting) {
