@@ -8,6 +8,9 @@ import { User } from '../users/user.model'
 
 const router = Router()
 
+const CLIENT_URL =
+  process.env.CLIENT_URL || 'http://localhost:3000'
+
 // Step 1 — Redirect to Google
 router.get(
   '/google',
@@ -22,39 +25,43 @@ router.get(
   '/google/callback',
   passport.authenticate('google', {
     session: false,
-    failureRedirect: 'http://localhost:3000/login?error=google_failed',
+    failureRedirect: `${CLIENT_URL}/login?error=google_failed`,
   }),
   async (req: Request, res: Response) => {
     try {
       const user = req.user as any
 
-      // Generate tokens
       const accessToken = generateAccessToken({
         userId: user._id.toString(),
         role: user.role,
       })
+
       const refreshToken = generateRefreshToken({
         userId: user._id.toString(),
         role: user.role,
       })
 
-      // Save refresh token
       await User.findByIdAndUpdate(user._id, { refreshToken })
 
-      // Send refresh token as cookie
       res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        sameSite:
+          process.env.NODE_ENV === 'production' ? 'none' : 'lax',
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
 
-      // Redirect to frontend with access token
-      res.redirect(
-        `http://localhost:3000/auth/callback?token=${accessToken}&name=${encodeURIComponent(user.name)}&email=${encodeURIComponent(user.email)}&role=${user.role}&id=${user._id}`
-      )
-    } catch (error) {
-      res.redirect('http://localhost:3000/login?error=google_failed')
+      const callbackUrl = new URL('/auth/callback', CLIENT_URL)
+
+      callbackUrl.searchParams.set('token', accessToken)
+      callbackUrl.searchParams.set('name', user.name)
+      callbackUrl.searchParams.set('email', user.email)
+      callbackUrl.searchParams.set('role', user.role)
+      callbackUrl.searchParams.set('id', user._id.toString())
+
+      res.redirect(callbackUrl.toString())
+    } catch {
+      res.redirect(`${CLIENT_URL}/login?error=google_failed`)
     }
   }
 )

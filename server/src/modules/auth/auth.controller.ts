@@ -5,10 +5,12 @@ import { ApiError } from '../../utils/ApiError'
 import * as authService from './auth.service'
 
 const COOKIE_OPTIONS = {
-  httpOnly: true,        // Cannot be accessed by JavaScript
+  httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'strict' as const,
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+  sameSite: (
+    process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+  ) as 'none' | 'lax',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 }
 
 // POST /api/auth/register
