@@ -41,7 +41,7 @@ const RegisterPage = () => {
     try {
       setLoading(true)
       const res = await registerAPI(form)
-      setAuth(res.data.user, res.data.accessToken)
+      setAuth(res.user, res.accessToken)
       navigate('/dashboard')
     } catch (err: any) {
       setError(err.response?.data?.message || 'Registration failed')
