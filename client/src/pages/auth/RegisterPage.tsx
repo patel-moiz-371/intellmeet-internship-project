@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/authStore'
 import { registerAPI } from '@/api/auth.api'
 import { Eye, EyeOff, Check, X, Video } from 'lucide-react'
+import { API_BASE_URL } from '@/config/constants'
 
 const passwordRules = [
   { label: 'At least 8 characters', test: (p: string) => p.length >= 8 },
@@ -145,7 +146,7 @@ const RegisterPage = () => {
             {/* Google Sign Up */}
             <button
               type="button"
-              onClick={() => window.location.href = '${API_BASE_URL}/auth/google'}
+              onClick={() => window.location.href = `${API_BASE_URL}/auth/google`}
               className="w-full flex items-center justify-center gap-3 bg-white/10 hover:bg-white/15 border border-white/10 text-white font-medium py-3 rounded-xl transition-all mb-6"
               >
               <img src="https://www.google.com/favicon.ico" alt="Google" className="w-4 h-4" />
