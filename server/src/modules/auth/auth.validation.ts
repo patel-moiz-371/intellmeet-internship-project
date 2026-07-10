@@ -30,8 +30,8 @@ export const validateRegister = (
 ) => {
   const result = registerSchema.safeParse(req.body)
   if (!result.success) {
-    const errors = result.error.issues ?? result.error.errors
-    const message = errors?.[0]?.message ?? 'Validation failed'
+    const message =
+  result.error.issues[0]?.message ?? 'Validation failed'
     return res.status(400).json({
       success: false,
       message,
@@ -48,8 +48,8 @@ export const validateLogin = (
 ) => {
   const result = loginSchema.safeParse(req.body)
   if (!result.success) {
-    const errors = result.error.issues ?? result.error.errors
-    const message = errors?.[0]?.message ?? 'Validation failed'
+    const message =
+  result.error.issues[0]?.message ?? 'Validation failed'
     return res.status(400).json({
       success: false,
       message,
