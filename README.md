@@ -18,7 +18,7 @@ IntellMeet is a production-grade meeting and collaboration platform built with t
 ---
 
 ## 🚀 Live Demo
-> Coming soon after deployment
+> https://zidio-intellmeet.vercel.app/
 
 ---
 
